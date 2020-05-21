@@ -11,6 +11,8 @@
 ## 0. Prerequisite
 1. A GPU of 4Go
 1. Cuda 1.0.1
+1. Git large file system extention (git-lfs)
+    * https://packagecloud.io/github/git-lfs/install#bash-deb 
 1. A copy of the repository
     * https://anonymous.4open.science/repository/dsaa-2020/
     * This includes code and datasets
