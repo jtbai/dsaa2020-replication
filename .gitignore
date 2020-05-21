@@ -1,0 +1,11 @@
+*.idea
+.idea*
+model_output/*
+*__pycache__/*
+*.pyc
+data/
+exploration/
+*.png
+*.xcf
+datasets/*
+

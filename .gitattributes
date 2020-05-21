@@ -1,0 +1,6 @@
+datasets/2straight filter=lfs diff=lfs merge=lfs -text
+datasets/2tfpositive_10pct filter=lfs diff=lfs merge=lfs -text
+datasets/2tfpositive_30pct filter=lfs diff=lfs merge=lfs -text
+datasets/2tfpositive_5pct filter=lfs diff=lfs merge=lfs -text
+datasets/3mc2bin_straight filter=lfs diff=lfs merge=lfs -text
+*.pkl filter=lfs diff=lfs merge=lfs -text
