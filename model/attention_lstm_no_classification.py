@@ -1,6 +1,4 @@
-from torch.nn import Module, LSTM, Embedding, Linear, Sigmoid, ReLU
-
-from torch.nn.init import kaiming_normal
+from torch.nn import Module, LSTM, Linear, ReLU
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 from torch.nn import functional as F
 import torch

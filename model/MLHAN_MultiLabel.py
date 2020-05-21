@@ -9,8 +9,6 @@ class MLHAN_MultiLabel(Module):
 
     def __init__(self, sentence_hidden_state_size, paragraph_hidden_state_size, input_size, nb_classes, nb_lstm_layer, dropout_percentage):
         super().__init__()
-        self.loss = "learned"
-        # self.loss_function = upper_level_cross_entropy
         self.sentence_hidden_state_size = sentence_hidden_state_size
         self.paragraph_hidden_state_size = paragraph_hidden_state_size
         self.input_size = input_size
