@@ -24,6 +24,11 @@ Use the following arguments in the CLI
 * `-m mlhan` for MLHAN proposed model
 * `-r <seed>` for a specific random starting point (default is 42). We alternatively used 42, 420, 26, 1337, 101 for seeds
 
+Examples:
+- ```python3 train.py -m mlhan -r 1337```
+- ```python3 train.py -m mlhan -r 26```
+- ```python3 train.py -m han -r 1337```
+- ```python3 train.py -m han -r 101```
 
 Other training parameters are hardcoded 
 

@@ -122,57 +122,44 @@ def print_results_by_experiment(results_array):
 
     print("Average: {:.4f}, Stdev: {:.4f}".format(np.mean(f_scores), np.std(f_scores)))
 
+print("\n\n")
+print("~~~ PAPER RESULTS - TABLE VI ~~~")
 
-print("~~~ PAPER RESULTS ~~~")
-
-print("Baseline Model")
+print("\n")
+print("Same Task - Baseline Model")
 results = []
 results.append(baseline_experiment_run1.model.evaluate_generator(test_loader_1lvl))
 results.append(baseline_experiment_run2.model.evaluate_generator(test_loader_1lvl))
 results.append(baseline_experiment_run3.model.evaluate_generator(test_loader_1lvl))
 print_results_by_experiment(results)
 f1_baseline = get_upper_f1_scores_by_experiments(results)
-
-print("Proposed Model")
+print("\n")
+print("Same Task - Proposed Model")
 results = []
 results.append(proposed_experiment_run1.model.evaluate_generator(test_loader_2lvl))
 results.append(proposed_experiment_run2.model.evaluate_generator(test_loader_2lvl))
 results.append(proposed_experiment_run3.model.evaluate_generator(test_loader_2lvl))
-print_results_by_experiment(results)
-print(" - Lower Level")
-print_lowerlevel_results_by_experiment(results)
+proposed_model_results = results
+print_results_by_experiment(proposed_model_results)
 f1_proposed = get_upper_f1_scores_by_experiments(results)
-
-print("~~~ XFERLEARNING COMPARISON ~~~")
-
-print("XferLearning Same Task Experiment")
-results = []
-results.append(xferlearning_sametask_experiment_run1.model.evaluate_generator(test_loader_mcbin_2lvl))
-results.append(xferlearning_sametask_experiment_run2.model.evaluate_generator(test_loader_mcbin_2lvl))
-results.append(xferlearning_sametask_experiment_run3.model.evaluate_generator(test_loader_mcbin_2lvl))
-print_results_by_experiment(results)
-print(" - Lower Level")
-print_lowerlevel_results_by_experiment(results)
-f1_xlern = get_upper_f1_scores_by_experiments(results)
-
-print("~~~ MULTI LABEL EXPERIMENT ~~~")
-
-print("HMC Experiment")
+print("\n")
+print("Multi Label - Proposed Model")
 results = []
 results.append(paper_proposed_hmc_experiment_run1.model.evaluate_generator(test_loader_mcbin_2lvl))
 results.append(paper_proposed_hmc_experiment_run2.model.evaluate_generator(test_loader_mcbin_2lvl))
 results.append(paper_proposed_hmc_experiment_run3.model.evaluate_generator(test_loader_mcbin_2lvl))
 print_results_by_experiment(results)
 
-print("~~~ MODEL GENERABILITY COMPARISON ~~~")
-
+print("\n\n")
+print("~~~ MODEL GENERABILITY CAPACITY - TABLE VII ~~~")
+print("\n")
 print("Baseline Generability Experiment - 10pct data")
 results = []
 results.append(baseline_generability_10pct_run1.model.evaluate_generator(test_loader_1lvl))
 results.append(baseline_generability_10pct_run2.model.evaluate_generator(test_loader_1lvl))
 results.append(baseline_generability_10pct_run3.model.evaluate_generator(test_loader_1lvl))
 print_results_by_experiment(results)
-
+print("\n")
 print("Proposed Generability Experiment  - 10pct data")
 results = []
 results.append(proposed_generability_10pct_run1.model.evaluate_generator(test_loader_2lvl))
@@ -182,14 +169,14 @@ results.append(proposed_generability_10pct_run4.model.evaluate_generator(test_lo
 results.append(proposed_generability_10pct_run5.model.evaluate_generator(test_loader_2lvl))
 results.append(proposed_generability_10pct_run6.model.evaluate_generator(test_loader_2lvl))
 print_results_by_experiment(results)
-
+print("\n")
 print("Baseline Generability Experiment - 15pct data ")
 results = []
 results.append(baseline_generability_15pct_run1.model.evaluate_generator(test_loader_1lvl))
 results.append(baseline_generability_15pct_run2.model.evaluate_generator(test_loader_1lvl))
 results.append(baseline_generability_15pct_run3.model.evaluate_generator(test_loader_1lvl))
 print_results_by_experiment(results)
-
+print("\n")
 print("Proposed Generability Experiment - 15pct data ")
 results = []
 results.append(proposed_generability_15pct_run1.model.evaluate_generator(test_loader_2lvl))
@@ -197,14 +184,14 @@ results.append(proposed_generability_15pct_run2.model.evaluate_generator(test_lo
 results.append(proposed_generability_15pct_run3.model.evaluate_generator(test_loader_2lvl))
 print_results_by_experiment(results)
 f1_generability =  get_upper_f1_scores_by_experiments(results)
-
+print("\n")
 print("Baseline Generability Experiment - 30pct data")
 results = []
 results.append(baseline_generability_30pct_run1.model.evaluate_generator(test_loader_1lvl))
 results.append(baseline_generability_30pct_run2.model.evaluate_generator(test_loader_1lvl))
 results.append(baseline_generability_30pct_run3.model.evaluate_generator(test_loader_1lvl))
 print_results_by_experiment(results)
-
+print("\n")
 print("Proposed Generability Experiment  - 30pct data")
 results = []
 results.append(proposed_generability_30pct_run1.model.evaluate_generator(test_loader_2lvl))
@@ -212,11 +199,45 @@ results.append(proposed_generability_30pct_run2.model.evaluate_generator(test_lo
 results.append(proposed_generability_30pct_run3.model.evaluate_generator(test_loader_2lvl))
 print_results_by_experiment(results)
 
-print("t-test | baseline vs proposed")
-print(ttest(f1_proposed,f1_baseline))
-print("t-test | xlern vs proposed")
-print(ttest(f1_proposed,f1_xlern))
-print("t-test | generability_15 vs baseline")
-print(ttest(f1_baseline, f1_generability))
+print("\n\n")
+print("~~~ TRANSFER LEARNING CAPACITY - TABLE VIII ~~~")
 
+results = []
+results.append(xferlearning_sametask_experiment_run1.model.evaluate_generator(test_loader_mcbin_2lvl))
+results.append(xferlearning_sametask_experiment_run2.model.evaluate_generator(test_loader_mcbin_2lvl))
+results.append(xferlearning_sametask_experiment_run3.model.evaluate_generator(test_loader_mcbin_2lvl))
+sequential_transfer_learning_results = results
+f1_xlern = get_upper_f1_scores_by_experiments(sequential_transfer_learning_results)
+
+print("\n")
+print("Sequential Transfer Learning  - Lower Level")
+print_lowerlevel_results_by_experiment(sequential_transfer_learning_results)
+print("\n")
+print("Simultaneous Transfer Learning (Proposed Model) - Lower Level")
+print_lowerlevel_results_by_experiment(proposed_model_results)
+
+print("\n")
+print("Sequential Transfer Learning - Upper Level")
+print_results_by_experiment(sequential_transfer_learning_results)
+print("\n")
+print("Simultaneous Transfer Learning (Proposed Model) - Upper Level")
+print_results_by_experiment(proposed_model_results)
+
+
+print("\n\n")
+print("~~~ T-Test Scores ~~~")
+
+
+
+print("t-test | MLHAN (proposed) vs HAN (baseline) ")
+ttest_baseline_vs_proposed = ttest(f1_proposed,f1_baseline)
+print("t-statistic : {:.3f} (p-value: {:.6f}) \n".format(ttest_baseline_vs_proposed[0], ttest_baseline_vs_proposed[1]))
+
+print("t-test | Simultaneous (proposed) vs Sequential (baseline) transfer learning")
+ttest_baseline_vs_xlearn = ttest(f1_proposed,f1_xlern)
+print("t-statistic : {:.3f} (p-value: {:.6f}) \n".format(ttest_baseline_vs_xlearn[0], ttest_baseline_vs_xlearn[1]))
+
+print("t-test | Truncated train dataset (proposed) vs full dataset (baseline)")
+ttest_generability = ttest(f1_baseline, f1_generability)
+print("t-statistic : {:.3f} (p-value: {:.6f}) \n".format(ttest_generability[0], ttest_generability[1]))
 
