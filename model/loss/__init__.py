@@ -1,1 +1,1 @@
-from model.loss.two_level_loss import MultiLevelLoss, MultiLevelMultiLabelLoss
+from model.loss.two_level_loss import MultiLevelLoss, MultiLevelMultiLabelLoss, LevelSwitchingLoss

@@ -57,6 +57,52 @@ class MultiLevelMultiLabelLoss(Module):
 
 
 
+class LevelSwitchingLoss(Module):
+    BINARY = 0
+    MULTILABEL = 1
+    MIXED = 2
+
+    def __init__(self, classification_type, initial_state=0):
+        super().__init__()
+        self.lower_classification_type = classification_type[0]
+        self.upper_classification_type = classification_type[1]
+        self.current_state = initial_state
+        self.target_loss = self.state_0
+        if initial_state == 1:
+            self.target_loss = self.state_1
+
+    def switch_state(self):
+        if self.current_state == 0:
+            self.current_state = 1
+            self.target_loss = self.state_1
+        elif self.current_state == 1:
+            self.current_state = 0
+            self.target_loss = self.state_0
+
+    def forward(self, y_pred, y_true):
+        return self.target_loss(y_pred, y_true)
+
+    def state_0(self, y_pred, y_true):
+        sentence_mc, sentence_bin = y_pred[0]
+        sentence_true_mc, sentence_true_bin = y_true[0]
+        if self.lower_classification_type == self.MULTILABEL:
+            level_0_loss = binary_cross_entropy(sentence_mc, sentence_true_mc)
+        elif self.lower_classification_type == self.BINARY:
+            level_0_loss = cross_entropy(sentence_bin, sentence_true_bin)
+
+        return level_0_loss
+
+    def state_1(self, y_pred, y_true):
+        paragraph_mc, paragraph_bin = y_pred[1]
+        paragraph_true_mc, paragraph_true_bin = y_true[1]
+        if self.upper_classification_type == self.MULTILABEL:
+            level_1_loss = binary_cross_entropy(paragraph_mc, paragraph_true_mc)
+        elif self.upper_classification_type == self.BINARY:
+            level_1_loss = cross_entropy(paragraph_bin, paragraph_true_bin)
+
+        return level_1_loss
+
+
 
 def upper_level_multilabel_cross_entropy(pred_y, y):
     level_1_pred, level_2_pred = pred_y

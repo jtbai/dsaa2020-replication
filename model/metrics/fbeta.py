@@ -230,7 +230,7 @@ class FBetaLowerLevelMultiLabel(FBeta):
         sentence_mc, sentence_bin = pred_y[0]
         sentence_true_mc, sentence_true_bin = y[0]
 
-        super().forward(sentence_bin,sentence_true_bin)
+        super().forward(sentence_bin, sentence_true_bin)
 
 def upper_level_accuracy(y_pred, y_true, ignore_index=-100):
     y_pred = y_pred[-1].argmax(1)
